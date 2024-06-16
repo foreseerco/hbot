@@ -5,7 +5,7 @@ on:
     types: [closed]
     branches:
       - master
-      - development
+      - develop
   release:
     types: [published, edited]
 
@@ -29,14 +29,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push Development Image
-        if: github.base_ref == 'development'
+      - name: Build and push Develop Image
+        if: github.base_ref == 'develop'
         uses: docker/build-push-action@v5
         with:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: foreseer/hbot:development
+          tags: foreseer/hbot:develop
 
       - name: Build and push Latest Image
         if: github.base_ref == 'master'
